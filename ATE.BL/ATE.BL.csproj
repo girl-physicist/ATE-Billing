@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{85B657BB-4D72-46E1-8C70-4ED52E3AE343}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Demo</RootNamespace>
-    <AssemblyName>Demo</AssemblyName>
+    <ProjectGuid>{F917D28D-026F-46C3-8C35-5F7F79F5DF5E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ATE.BL</RootNamespace>
+    <AssemblyName>ATE.BL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,21 +40,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Classes\ATE.cs" />
+    <Compile Include="Classes\CallInfo.cs" />
+    <Compile Include="Classes\Port.cs" />
+    <Compile Include="Classes\Terminal.cs" />
+    <Compile Include="Enums\CallState.cs" />
+    <Compile Include="Enums\CallType.cs" />
+    <Compile Include="Enums\PortState.cs" />
+    <Compile Include="Enums\TerminalState.cs" />
+    <Compile Include="EventArgsHeirs\EventArgsAnswer.cs" />
+    <Compile Include="EventArgsHeirs\EventArgsCall.cs" />
+    <Compile Include="EventArgsHeirs\EventArgsEndCall.cs" />
+    <Compile Include="EventArgsHeirs\EventArgsReject.cs" />
+    <Compile Include="EventArgsHeirs\IEventArgsCalling.cs" />
+    <Compile Include="Interfaces\IATE.cs" />
+    <Compile Include="Interfaces\ICall.cs" />
+    <Compile Include="Interfaces\IPort.cs" />
+    <Compile Include="Interfaces\ITerminal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ATE.BL\ATE.BL.csproj">
-      <Project>{f917d28d-026f-46c3-8c35-5f7f79f5df5e}</Project>
-      <Name>ATE.BL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Billing.BL\Billing.BL.csproj">
-      <Project>{1789f8c9-f534-4064-adef-cf69385e06d4}</Project>
-      <Name>Billing.BL</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
