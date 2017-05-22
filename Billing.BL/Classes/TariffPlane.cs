@@ -8,7 +8,8 @@ namespace Billing.BL.Classes
         public int CostOfCallPerMinute { get; }
         public int LimitCallInMonth { get; }
         public TariffType TariffType { get; }
-       public TariffPlane(TariffType tariffType)
+
+        public TariffPlane(TariffType tariffType)
         {
             TariffType = tariffType;
             switch (TariffType)
@@ -42,5 +43,6 @@ namespace Billing.BL.Classes
                     break;
                 }
             }
+        }
     }
 }

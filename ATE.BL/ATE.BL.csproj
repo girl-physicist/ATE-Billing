@@ -51,7 +51,6 @@
     <Compile Include="EventArgsHeirs\EventArgsAnswer.cs" />
     <Compile Include="EventArgsHeirs\EventArgsCall.cs" />
     <Compile Include="EventArgsHeirs\EventArgsEndCall.cs" />
-    <Compile Include="EventArgsHeirs\EventArgsReject.cs" />
     <Compile Include="EventArgsHeirs\IEventArgsCalling.cs" />
     <Compile Include="Interfaces\IATE.cs" />
     <Compile Include="Interfaces\ICall.cs" />

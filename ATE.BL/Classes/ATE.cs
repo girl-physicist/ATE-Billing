@@ -13,13 +13,21 @@ namespace ATE.BL.Classes
     {
         private readonly IDictionary<int, Port> _usersData;
         private readonly ICollection<CallInfo> _callList;
+        //  private readonly ICollection<CallInformation> _callList = new List<CallInformation>();
         public ATE(IDictionary<int, Port> usersData, ICollection<CallInfo> callList)
         {
             _usersData = usersData;
             _callList = callList;
         }
+
+        public ATE()
+        {
+            _usersData = new Dictionary<int, Port>();
+        }
+
         public Terminal GetNewTerminal(int number)
         {
+          
             var newPort = new Port();
             // сделать подписку на события
            

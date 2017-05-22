@@ -4,50 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATE.BL.Enums;
+using ATE.BL.EventArgsHeirs;
 using ATE.BL.Interfaces;
 
 namespace ATE.BL.Classes
 {
-   public class Terminal:ITerminal
+    public class Terminal : ITerminal
     {
-        private int number;
-        private Port newPort;
-
-        public Terminal(TerminalState terminalState, int telephonNumber, IPort port)
-        {
-            TerminalState = terminalState;
-            TelephonNumber = telephonNumber;
-            Port = port;
-        }
-
-        public Terminal(int number, Port newPort)
-        {
-            this.number = number;
-            this.newPort = newPort;
-        }
-
         public TerminalState TerminalState { get; }
-        public int TelephonNumber { get; }
-        public IPort Port { get; }
-
-        public void Call(int number)
+        private readonly int _number;
+        public int TelephonNumber => _number;
+        private readonly Port _terminalPort;
+        public IPort Port => _terminalPort;
+        private Guid _id;
+        public Terminal(int number, Port port)
         {
-            throw new NotImplementedException();
+            _number = number;
+            _terminalPort = port;
+        }
+        public event EventHandler<EventArgsCall> CallEvent;
+        public event EventHandler<EventArgsAnswer> AnswerEvent;
+        public event EventHandler<EventArgsEndCall> EndCallEvent;
+
+
+        protected virtual void OnCallEvent(EventArgsCall e)
+        {
+            CallEvent?.Invoke(this, e);
         }
 
-        public void AnswerCall()
+        protected virtual void OnAnswerEvent(EventArgsAnswer e)
         {
-            throw new NotImplementedException();
+            AnswerEvent?.Invoke(this, e);
         }
 
-        public void RejectCall()
+        protected virtual void OnEndCallEvent(EventArgsEndCall e)
         {
-            throw new NotImplementedException();
-        }
-
-        public void EndCall()
-        {
-            throw new NotImplementedException();
+            EndCallEvent?.Invoke(this, e);
         }
     }
 }

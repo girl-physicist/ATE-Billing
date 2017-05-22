@@ -8,8 +8,19 @@ namespace ATE.BL.EventArgsHeirs
 {
     public class EventArgsCall : EventArgs, IEventArgsCalling
     {
-        public int CallerNumber => throw new NotImplementedException();
-
-        public int TargetNumber => throw new NotImplementedException();
+        public int TelephoneNumber { get; private set; }
+        public int TargetTelephoneNumber { get; private set; }
+        public Guid Id { get; private set; }
+        public EventArgsCall(int number, int target)
+        {
+            TelephoneNumber = number;
+            TargetTelephoneNumber = target;
+        }
+        public EventArgsCall(int number, int target, Guid id)
+        {
+            TelephoneNumber = number;
+            TargetTelephoneNumber = target;
+            Id = id;
+        }
     }
 }

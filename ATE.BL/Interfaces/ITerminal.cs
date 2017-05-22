@@ -12,10 +12,6 @@ namespace ATE.BL.Interfaces
         TerminalState TerminalState { get; }
         int TelephonNumber { get; }
         IPort Port { get; }
-        // через event
-        void Call(int number);
-        void AnswerCall();
-        void RejectCall();
-        void EndCall();
+        
     }
 }

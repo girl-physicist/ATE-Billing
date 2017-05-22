@@ -8,7 +8,8 @@ namespace ATE.BL.EventArgsHeirs
 {
    public interface IEventArgsCalling
     {
-         int CallerNumber { get; }
-         int TargetNumber { get; }
+        int TelephoneNumber { get; }
+        int TargetTelephoneNumber { get; }
+        Guid Id { get; }
     }
 }
