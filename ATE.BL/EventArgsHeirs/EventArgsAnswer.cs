@@ -2,8 +2,8 @@
 using ATE.BL.Enums;
 
 namespace ATE.BL.EventArgsHeirs
-{
-   public class EventArgsAnswer : EventArgs, IEventArgsCalling
+{    // Расширение библиотечного класса аргументов
+    public class EventArgsAnswer : EventArgs, IEventArgsCalling
     {
         public int TelephoneNumber { get; }
         public int TargetTelephoneNumber { get; }

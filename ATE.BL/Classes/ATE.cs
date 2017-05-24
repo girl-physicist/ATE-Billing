@@ -25,12 +25,18 @@ namespace ATE.BL.Classes
             _usersData = new Dictionary<int, Port>();
         }
 
+        //конструктор класса, принимающего сообщение
         public Terminal GetNewTerminal(int number)
         {
-          
+          // Создаем объект, имеющий событие
             var newPort = new Port();
-            // сделать подписку на события
-           
+            //  Подписываемся на обработчики события
+            newPort.CallEvent += CallingTo;
+            newPort.AnswerEvent += CallingTo;
+           newPort.EndCallEvent += CallingTo;
+            // Вызываем симулятор возникновения события
+            // obj.SimulateEvent();
+
             _usersData.Add(number, newPort);
             var newTerminal = new Terminal(number, newPort);
             return newTerminal;
@@ -41,7 +47,10 @@ namespace ATE.BL.Classes
             return _callList;
         }
 
+        public void CallingTo(object sender, IEventArgsCalling e)
+        {
+        }
     }
 
-    
+
 }

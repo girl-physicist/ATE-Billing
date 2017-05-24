@@ -25,21 +25,82 @@ namespace ATE.BL.Classes
         public event EventHandler<EventArgsCall> CallEvent;
         public event EventHandler<EventArgsAnswer> AnswerEvent;
         public event EventHandler<EventArgsEndCall> EndCallEvent;
-
-
-        protected virtual void OnCallEvent(EventArgsCall e)
+        public void ConnectToPort()
         {
-            CallEvent?.Invoke(this, e);
+            if (_terminalPort.Connect(this))
+            {
+                _terminalPort.CallPortEvent += TakeIncomingCall;
+                _terminalPort.AnswerPortEvent += TakeAnswer;
+            }
         }
-
-        protected virtual void OnAnswerEvent(EventArgsAnswer e)
+        protected virtual void OnCallEvent(int targetNumber)
         {
-            AnswerEvent?.Invoke(this, e);
+            CallEvent?.Invoke(this, new EventArgsCall(_number, targetNumber));
         }
-
-        protected virtual void OnEndCallEvent(EventArgsEndCall e)
+        public void Call(int targetNumber)
         {
-            EndCallEvent?.Invoke(this, e);
+            OnCallEvent(targetNumber);
         }
+        protected virtual void OnAnswerEvent(int targetNumber, CallState state, Guid id)
+        {
+            AnswerEvent?.Invoke(this, new EventArgsAnswer(_number, targetNumber, state, id));
+        }
+        public void AnswerToCall(int target, CallState state, Guid id)
+        {
+            OnAnswerEvent(target, state, id);
+        }
+        protected virtual void OnEndCallEvent(Guid id)
+        {
+            EndCallEvent?.Invoke(this, new EventArgsEndCall(id, _number));
+        }
+        public void EndCall()
+        {
+            OnEndCallEvent(_id);
+        }
+        public void TakeIncomingCall(object sender, EventArgsCall e)
+        {
+            bool flag = true;
+            _id = e.Id;
+            Console.WriteLine("Number: {0} call to number {1}", e.TelephoneNumber, e.TargetTelephoneNumber);
+            while (flag == true)
+            {
+                Console.WriteLine("Answer? Y/N");
+                var k = Console.ReadKey().Key;
+                if (k == ConsoleKey.Y)
+                {
+                    flag = false;
+                    Console.WriteLine();
+                    AnswerToCall(e.TelephoneNumber, CallState.Answered, e.Id);
+                }
+                else if (k == ConsoleKey.N)
+                {
+                    flag = false;
+                    Console.WriteLine();
+                    EndCall();
+                }
+                else
+                {
+                    Console.WriteLine();
+                    flag = true;
+                }
+            }
+        }
+        public void TakeAnswer(object sender, EventArgsAnswer e)
+        {
+            _id = e.Id;
+           Console.WriteLine(
+                e.StateInCall == CallState.Answered
+                    ? "Number: {0}, have answer on call a number: {1}"
+                    : "Number: {0}, have rejected call a number: {1}", e.TelephoneNumber, e.TargetTelephoneNumber);
+        }
+        //public string TakeAnswer(object sender, EventArgsAnswer e)
+        //{
+        //    //  _id = e.Id;
+        //    return e.StateInCall == CallState.Answered ? "Answer" : "Reject";
+        //}
+
+
+
+
     }
 }
