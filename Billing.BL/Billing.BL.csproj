@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Classes\Contract.cs" />
+    <Compile Include="Classes\Helper.cs" />
     <Compile Include="Classes\Subscriber.cs" />
     <Compile Include="Classes\TariffPlane.cs" />
     <Compile Include="Enums\TariffType.cs" />

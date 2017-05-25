@@ -23,7 +23,7 @@ namespace Billing.BL.Classes
            // Tariff = tariff;
             Subscriber = subscriber;
             Number = Rnd.Next(100, 999);
-           Tariff = new TariffPlane(type);
+            Tariff = new TariffPlane(type);
         }
 
        

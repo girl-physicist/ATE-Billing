@@ -10,22 +10,31 @@ using Billing.BL.Enums;
 using Billing.BL.Interfaces;
 
 
+
 namespace Demo
 {
     class Program
     {
         static void Main(string[] args)
         {
+            //Helper b=new Helper();
+            //b.Num();
+            IATE ate1=new ATE.BL.Classes.ATE();
             ISubscriber subscriber1 = new Subscriber("Kesey", "Ken");
             IContract contract1 = new Contract(subscriber1, TariffType.Tarif1);
-            IATE ate1 = new ATE.BL.Classes.ATE();
-            ate1.GetNewTerminal(contract1.Number);
+            IPort port1=new Port(ate1);
+            ITerminal terminal1=new Terminal(contract1.Number,port1);
 
+
+
+            IATE ate2 = new ATE.BL.Classes.ATE();
             ISubscriber subscriber2 = new Subscriber("Vonnegut", "Kurt");
             IContract contract2 = new Contract(subscriber2, TariffType.Tarif2);
-            IATE ate2 = new ATE.BL.Classes.ATE();
-            ate2.GetNewTerminal(contract2.Number);
-            //передача номера телефона для терминала GetNewTerminal(int number==contract1.Number)
+            IPort port2 = new Port(ate2);
+            ITerminal terminal2 = new Terminal(contract2.Number, port2);
+           
+
+
             Console.ReadLine();
         }
     }

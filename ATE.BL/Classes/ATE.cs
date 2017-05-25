@@ -11,35 +11,34 @@ namespace ATE.BL.Classes
 {
   public  class ATE:IATE
     {
-        private readonly IDictionary<int, Port> _usersData;
+        private readonly IDictionary< IPort,ITerminal> _usersData;
         private readonly ICollection<CallInfo> _callList;
         //  private readonly ICollection<CallInformation> _callList = new List<CallInformation>();
-        public ATE(IDictionary<int, Port> usersData, ICollection<CallInfo> callList)
+        public ATE(IDictionary<IPort, ITerminal> usersData)
         {
             _usersData = usersData;
-            _callList = callList;
+            _callList = new List<CallInfo>();
         }
 
         public ATE()
         {
-            _usersData = new Dictionary<int, Port>();
+            _usersData = new Dictionary<IPort, ITerminal>();
+            _callList = new List<CallInfo>();
         }
 
-        //конструктор класса, принимающего сообщение
-        public Terminal GetNewTerminal(int number)
+        public void CallProcessing(object sender, EventArgsCallToPort e)
         {
-          // Создаем объект, имеющий событие
-            var newPort = new Port();
-            //  Подписываемся на обработчики события
-            newPort.CallEvent += CallingTo;
-            newPort.AnswerEvent += CallingTo;
-           newPort.EndCallEvent += CallingTo;
-            // Вызываем симулятор возникновения события
-            // obj.SimulateEvent();
+           
+            //var targetPort = _usersData.Where(x => x.Value.TelephonNumber == e.TargetTelephoneNumber).Select(x => x.Key)
+            //    .ElementAt(0);
+            //if (targetPort.PortState == PortState.Connected)
+            //{
 
-            _usersData.Add(number, newPort);
-            var newTerminal = new Terminal(number, newPort);
-            return newTerminal;
+            //}
+            //else
+            //{
+
+            //}
         }
 
         public ICollection<CallInfo> GetInfoList()
@@ -47,9 +46,7 @@ namespace ATE.BL.Classes
             return _callList;
         }
 
-        public void CallingTo(object sender, IEventArgsCalling e)
-        {
-        }
+        
     }
 
 
