@@ -12,5 +12,7 @@ namespace ATE.BL.Interfaces
     {
         //Terminal GetNewTerminal(int number);
         void CallProcessing(object sender, EventArgsCallToPort e);
+
+       ITerminal ConnectToPortTerminal(int number);
     }
 }

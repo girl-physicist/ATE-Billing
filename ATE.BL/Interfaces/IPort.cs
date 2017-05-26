@@ -13,11 +13,11 @@ namespace ATE.BL.Interfaces
     {
         PortState PortState { get; }
         bool Connect(Terminal terminal);
-        void ConnectToServer(object sender, EventArgsCall eventArgsCall);
+        //void ConnectToServer(object sender, EventArgsCall eventArgsCall);
         void AnswerPortEvent(object sender, EventArgsAnswer e);
         bool Disconnect(Terminal terminal);
         bool Blocked(Terminal terminal);
-       
+        event EventHandler<EventArgsCall> CallEvent;
 
     }
 }

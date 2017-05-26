@@ -16,30 +16,29 @@ namespace ATE.BL.Classes
         public int TelephonNumber => _number;
         private readonly IPort _terminalPort;
         public IPort Port => _terminalPort;
-        private Guid _id;
         public Terminal(int number, IPort port)
         {
             _number = number;
             _terminalPort = port;
         }
         public event EventHandler<EventArgsCall> OutgoingCallEvent;
-        public event EventHandler<EventArgsAnswer> AnswerEvent;
+        // public event EventHandler<EventArgsAnswer> AnswerEvent;
         //  public event EventHandler<EventArgsEndCall> EndCallEvent;
-
+      protected virtual void OnOutgoingCallEvent(int targetNumber)
+        {
+            OutgoingCallEvent?.Invoke(this, new EventArgsCall(_number, targetNumber));
+        }
+        public void Call(int targetNumber)
+        {
+            OnOutgoingCallEvent(targetNumber);
+        }
         public void ConnectToPort()
         {
-            OutgoingCallEvent += Port.ConnectToServer;
-            AnswerEvent += Port.AnswerPortEvent;
+            if (_terminalPort.Connect(this))
+            {
+               // _terminalPort.CallPortEvent += TakeIncomingCall;
+               // _terminalPort.AnswerPortEvent += TakeAnswer;
+            }
         }
-        public void OnOutgoingCallEvent(int number, int targetNumber)
-        {
-            OutgoingCallEvent?.Invoke(this, new EventArgsCall(number, targetNumber));
-        }
-        public void OnAnswerEvent(int number, int targetNumber, CallState state, DateTime startCall)
-        {
-            AnswerEvent?.Invoke(this, new ParamAnswer(number,targetNumber,state,startCall));
-        }
-
-
     }
 }

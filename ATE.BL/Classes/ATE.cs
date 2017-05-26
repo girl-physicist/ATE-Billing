@@ -13,7 +13,6 @@ namespace ATE.BL.Classes
     {
         private readonly IDictionary< IPort,ITerminal> _usersData;
         private readonly ICollection<CallInfo> _callList;
-        //  private readonly ICollection<CallInformation> _callList = new List<CallInformation>();
         public ATE(IDictionary<IPort, ITerminal> usersData)
         {
             _usersData = usersData;
@@ -28,17 +27,6 @@ namespace ATE.BL.Classes
 
         public void CallProcessing(object sender, EventArgsCallToPort e)
         {
-           
-            //var targetPort = _usersData.Where(x => x.Value.TelephonNumber == e.TargetTelephoneNumber).Select(x => x.Key)
-            //    .ElementAt(0);
-            //if (targetPort.PortState == PortState.Connected)
-            //{
-
-            //}
-            //else
-            //{
-
-            //}
         }
 
         public ICollection<CallInfo> GetInfoList()
@@ -46,7 +34,20 @@ namespace ATE.BL.Classes
             return _callList;
         }
 
-        
+       
+        public ITerminal ConnectToPortTerminal(int number)
+        {
+          var newPort = new Port();
+          newPort.CallEvent += CallingTo;
+          var newTerminal = new Terminal(number, newPort);
+          _usersData.Add(newPort, newTerminal);
+          return newTerminal;
+        }
+
+        public void CallingTo(object sender, IEventArgsCalling e)
+        {
+           
+        }
     }
 
 
