@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ATE.BL.EventArgsHeirs
 {
-   public interface IEventArgsCalling
+    public interface IEventArgsCalling
     {
         int TelephoneNumber { get; }
         int TargetTelephoneNumber { get; }
-      
+        Guid Id { get;}
     }
 }

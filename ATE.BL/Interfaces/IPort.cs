@@ -11,13 +11,19 @@ namespace ATE.BL.Interfaces
 {
     public interface IPort
     {
-        PortState PortState { get; }
+        PortState PortState { get; set; }
         bool Connect(Terminal terminal);
-        //void ConnectToServer(object sender, EventArgsCall eventArgsCall);
-        void AnswerPortEvent(object sender, EventArgsAnswer e);
         bool Disconnect(Terminal terminal);
         bool Blocked(Terminal terminal);
         event EventHandler<EventArgsCall> CallEvent;
+        event EventHandler<EventArgsCall> CallPortEvent;
+        event EventHandler<EventArgsAnswer> AnswerPortEvent;
+        event EventHandler<EventArgsAnswer> AnswerEvent;
+        event EventHandler<EventArgsEndCall> EndCallEvent;
 
+        void AnswerCall(int number, int targetNumber, CallState state);
+        void AnswerCall(int telephoneNumber, int targetTelephoneNumber, CallState stateInCall, Guid id);
+        void IncomingCall(int number, int targetNumber);
+        void IncomingCall(int number, int targetNumber, Guid id);
     }
 }

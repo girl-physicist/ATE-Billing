@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Classes\ATE.cs" />
     <Compile Include="Classes\CallInfo.cs" />
+    <Compile Include="Classes\Helper.cs" />
     <Compile Include="Classes\Port.cs" />
     <Compile Include="Classes\Terminal.cs" />
     <Compile Include="Enums\CallState.cs" />
@@ -50,10 +51,8 @@
     <Compile Include="Enums\TerminalState.cs" />
     <Compile Include="EventArgsHeirs\EventArgsAnswer.cs" />
     <Compile Include="EventArgsHeirs\EventArgsCall.cs" />
-    <Compile Include="EventArgsHeirs\EventArgsCallToPort.cs" />
     <Compile Include="EventArgsHeirs\EventArgsEndCall.cs" />
     <Compile Include="EventArgsHeirs\IEventArgsCalling.cs" />
-    <Compile Include="EventArgsHeirs\ParamAnswer.cs" />
     <Compile Include="Interfaces\IATE.cs" />
     <Compile Include="Interfaces\ICall.cs" />
     <Compile Include="Interfaces\IPort.cs" />

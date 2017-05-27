@@ -9,10 +9,7 @@ using ATE.BL.EventArgsHeirs;
 namespace ATE.BL.Interfaces
 {
    public interface IATE
-    {
-        //Terminal GetNewTerminal(int number);
-        void CallProcessing(object sender, EventArgsCallToPort e);
-
-       ITerminal ConnectToPortTerminal(int number);
-    }
+   {
+       void ConnectPortToTerminal(ITerminal terminal);
+   }
 }

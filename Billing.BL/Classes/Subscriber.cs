@@ -27,7 +27,6 @@ namespace Billing.BL.Classes
         {
             Money -= money;
         }
-
         public void GetReport()
         {
             throw new NotImplementedException();

@@ -7,16 +7,23 @@ namespace ATE.BL.EventArgsHeirs
     {
         public int TelephoneNumber { get; }
         public int TargetTelephoneNumber { get; }
-        public DateTime StartCall { get; }
         public CallState StateInCall;
+        public Guid Id { get; }
 
-        public EventArgsAnswer(int number, int target, CallState state, DateTime startCall)
+        public EventArgsAnswer(int number, int target, CallState state)
         {
             TelephoneNumber = number;
             TargetTelephoneNumber = target;
             StateInCall = state;
-            StartCall = startCall;
         }
+        public EventArgsAnswer(int number, int target, CallState state, Guid id)
+        {
+            TelephoneNumber = number;
+            TargetTelephoneNumber = target;
+            StateInCall = state;
+            Id = id;
+        }
+
 
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Billing.BL.Classes;
 using Billing.BL.Enums;
 
+
 namespace Billing.BL.Interfaces
 {
   public  interface IContract

@@ -11,10 +11,10 @@ namespace ATE.BL.Classes
         public int CallerNumber { get; }
         public int TargetNumber { get; }
         public DateTime Date { get; }
-        public DateTime TimeStartCall { get; }
-        public DateTime TimeEndCall { get; }
+        public DateTime TimeStartCall { get; set; }
+        public DateTime TimeEndCall { get; set; }
         public Guid Id { get; set; }
-
+        public int Cost { get; set; }
 
         public CallInfo(int myNumber, int targetNumber, DateTime date, DateTime beginCall, DateTime endCall)
         {

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Billing.BL.Enums;
 using Billing.BL.Interfaces;
 
@@ -14,7 +10,7 @@ namespace Billing.BL.Classes
         private static readonly Random Rnd = new Random();
         public ISubscriber Subscriber { get; }
         public int Number { get; }
-        public TariffPlane Tariff { get; private set; }
+       public TariffPlane Tariff { get; private set; }
         private DateTime _lastTariffUpdateDate;
 
         public Contract(ISubscriber subscriber,TariffType type)
