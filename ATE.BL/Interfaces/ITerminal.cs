@@ -11,13 +11,11 @@ namespace ATE.BL.Interfaces
 {
   public  interface ITerminal
     {
-     //   TerminalState TerminalState { get; }
         int TelephonNumber { get; }
         IPort Port { get; }
         void Call(int targetNumber);
         void ConnectToPort();
-
-
+        void DisconnectFromPort();
         void EndCall();
     }
 }

@@ -65,23 +65,15 @@ namespace ATE.BL.Classes
         }
         private void EndCall(object sender, EventArgsEndCall e)
         {
-            EndCallEvent?.Invoke(this, new EventArgsEndCall(e.Id, e.TelephoneNumber));
+            EndCallEvent?.Invoke(this, new EventArgsEndCall( e.TelephoneNumber));
         }
         public void IncomingCall(int number, int targetNumber)
         {
             CallPortEvent?.Invoke(this, new EventArgsCall(number, targetNumber));
         }
-        public void IncomingCall(int number, int targetNumber, Guid id)
-        {
-            CallPortEvent?.Invoke(this, new EventArgsCall(number, targetNumber, id));
-        }
-        public void AnswerCall(int number, int targetNumber, CallState state)
+      public void AnswerCall(int number, int targetNumber, CallState state)
         {
             AnswerPortEvent?.Invoke(this, new EventArgsAnswer(number, targetNumber, state));
         }
-        public void AnswerCall(int number, int targetNumber, CallState state, Guid id)
-        {
-            AnswerPortEvent?.Invoke(this, new EventArgsAnswer(number, targetNumber, state, id));
-        }
-    }
+       }
 }

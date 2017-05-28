@@ -12,8 +12,7 @@ namespace ATE.BL.Classes
         private readonly IPort _terminalPort;
         public IPort Port => _terminalPort;
         readonly Helper _help = new Helper();
-        private Guid _id;
-        public Terminal(int number, IPort port)
+       public Terminal(int number, IPort port)
         {
             _number = number;
             _terminalPort = port;
@@ -24,6 +23,14 @@ namespace ATE.BL.Classes
             {
                 _terminalPort.CallPortEvent += TakeIncomingCall;
                 _terminalPort.AnswerPortEvent += TakeAnswer;
+               }
+        }
+        public void DisconnectFromPort()
+        {
+            if (_terminalPort.Disconnect(this))
+                {
+                _terminalPort.CallPortEvent -= TakeIncomingCall;
+                _terminalPort.AnswerPortEvent -= TakeAnswer;
             }
         }
         public event EventHandler<EventArgsCall> OutgoingCallEvent;
@@ -38,28 +45,23 @@ namespace ATE.BL.Classes
                 _help.GetMessageAboutCallYourself(targetNumber);
             }
         }
-        public void AnswerToCall(int target, CallState state, Guid id)
+        public void AnswerToCall(int target, CallState state)
         {
-            AnswerEvent?.Invoke(this, new EventArgsAnswer(_number, target, state, id));
+            AnswerEvent?.Invoke(this, new EventArgsAnswer(_number, target, state));
         }
         public void TakeIncomingCall(object sender, EventArgsCall e)
         {
-            _id = e.Id;
             var param = _help.GetAnswer(e.TelephoneNumber, e.TargetTelephoneNumber);
             if (param == "Answer")
-                AnswerToCall(e.TelephoneNumber, CallState.Answered, e.Id);
+                AnswerToCall(e.TelephoneNumber, CallState.Answered/*, e.Id*/);
             else if (param == "Reject")
             {
              EndCall();
             }
         }
-        protected virtual void OnEndCallEvent(Guid id)
-        {
-            EndCallEvent?.Invoke(this, new EventArgsEndCall(_id, _number));
-        }
         public void EndCall()
         {
-            OnEndCallEvent(_id);
+            EndCallEvent?.Invoke(this, new EventArgsEndCall(_number));
         }
         public void TakeAnswer(object sender, EventArgsAnswer e)
         {

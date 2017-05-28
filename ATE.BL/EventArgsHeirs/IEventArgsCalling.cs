@@ -10,6 +10,6 @@ namespace ATE.BL.EventArgsHeirs
     {
         int TelephoneNumber { get; }
         int TargetTelephoneNumber { get; }
-        Guid Id { get;}
+       
     }
 }

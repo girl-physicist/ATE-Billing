@@ -10,17 +10,12 @@ namespace ATE.BL.EventArgsHeirs
     {
         public int TelephoneNumber { get;  }
         public int TargetTelephoneNumber { get;  }
-        public Guid Id { get; }
+       
         public EventArgsCall(int number, int target)
         {
             TelephoneNumber = number;
             TargetTelephoneNumber = target;
         }
-        public EventArgsCall(int number, int target, Guid id)
-        {
-            TelephoneNumber = number;
-            TargetTelephoneNumber = target;
-            Id = id;
-        }
+
     }
 }

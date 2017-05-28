@@ -24,8 +24,7 @@ namespace ATE.BL.Interfaces
         event EventHandler<EventArgsEndCall> EndCallEvent;
 
         void AnswerCall(int number, int targetNumber, CallState state);
-        void AnswerCall(int telephoneNumber, int targetTelephoneNumber, CallState stateInCall, Guid id);
-        void IncomingCall(int number, int targetNumber);
-        void IncomingCall(int number, int targetNumber, Guid id);
+       void IncomingCall(int number, int targetNumber);
+       
     }
 }

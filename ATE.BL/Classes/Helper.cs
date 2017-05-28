@@ -58,7 +58,11 @@ namespace ATE.BL.Classes
                    break;
             }
         }
-       
+        public void GetMessageAboutCallToDisconnectTerminal(int targetTelephoneNumber)
+        {
+            Console.WriteLine(" The phone {0} is not connected to the network!!!", targetTelephoneNumber);
+        }
+        
     }
 }
 

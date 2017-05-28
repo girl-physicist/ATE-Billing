@@ -10,9 +10,8 @@ namespace ATE.BL.Interfaces
 {
    public interface IATE
    {
-       void ConnectPortToTerminal(ITerminal terminal);
-       //CallInfo GetInfoList();
-      ICollection<CallInfo> GetInfoList();
+       void GetUsersData(ITerminal terminal);
+     CallInfo GetInfoList();
        
     }
 }

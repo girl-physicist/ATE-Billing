@@ -19,7 +19,6 @@ namespace Demo
     {
         static void Main(string[] args)
         {
-            Helper b = new Helper();
             IATE ate = new ATE.BL.Classes.ATE();
             ISubscriber subscriber1 = new Subscriber("Kesey", "Ken");
             IContract contract1 = new Contract(subscriber1, TariffType.Tarif1);
@@ -32,8 +31,8 @@ namespace Demo
             ITerminal terminal2 = new Terminal(contract2.Number, port2);
 
 
-            ate.ConnectPortToTerminal(terminal1);
-            ate.ConnectPortToTerminal(terminal2);
+            ate.GetUsersData(terminal1);
+            ate.GetUsersData(terminal2);
             terminal1.ConnectToPort();
             terminal2.ConnectToPort();
 
@@ -53,11 +52,19 @@ namespace Demo
             Thread.Sleep(2000);
             Console.WriteLine();
 
-            //проверка соединения (случай, когда вызываемый абонент отклоняте звонок)
+            //проверка соединения (случай, когда вызываемый абонент не отвечает на звонок)
             terminal2.Call(terminal1.TelephonNumber);
+            //terminal1.EndCall();
             Console.WriteLine();
 
+            //проверка соединения (случай, когда вызываемый терминал не подключен к порту)
+            terminal2.DisconnectFromPort();
+            terminal1.Call(terminal2.TelephonNumber);
+            Thread.Sleep(2000);
+            terminal2.EndCall();
+            Console.WriteLine();
 
+           
             ate.GetInfoList();
 
             Console.ReadLine();

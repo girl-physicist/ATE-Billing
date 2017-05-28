@@ -52,7 +52,6 @@
     <Compile Include="EventArgsHeirs\EventArgsEndCall.cs" />
     <Compile Include="EventArgsHeirs\IEventArgsCalling.cs" />
     <Compile Include="Interfaces\IATE.cs" />
-    <Compile Include="Interfaces\ICall.cs" />
     <Compile Include="Interfaces\IPort.cs" />
     <Compile Include="Interfaces\ITerminal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
