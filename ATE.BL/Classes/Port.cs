@@ -7,7 +7,7 @@ namespace ATE.BL.Classes
 {
     public class Port : IPort
     {
-        public bool Flag;
+        private bool _flag;
         private PortState _portState;
         public PortState PortState { get => _portState; set => _portState = value; }
         public Port()
@@ -24,19 +24,19 @@ namespace ATE.BL.Classes
             if (PortState == PortState.Disсonnected)
             {
                 PortState = PortState.Connected;
-                Flag = true;
+                _flag = true;
                 terminal.OutgoingCallEvent += CallingTo;
                 terminal.AnswerEvent += AnswerTo;
                 terminal.EndCallEvent += EndCall;
             }
-            return Flag;
+            return _flag;
         }
         public bool Disconnect(Terminal terminal)
         {
             if (PortState == PortState.Connected)
             {
                 PortState = PortState.Disсonnected;
-                Flag = false;
+                _flag = false;
                 terminal.OutgoingCallEvent -= CallingTo;
                 terminal.AnswerEvent -= AnswerTo;
                 terminal.EndCallEvent -= EndCall;
@@ -48,7 +48,7 @@ namespace ATE.BL.Classes
             if (PortState != PortState.Blocked)
             {
                 PortState = PortState.Blocked;
-                Flag = false;
+                _flag = false;
                 terminal.OutgoingCallEvent -= CallingTo;
                 terminal.AnswerEvent -= AnswerTo;
                 terminal.EndCallEvent -= EndCall;
@@ -65,15 +65,15 @@ namespace ATE.BL.Classes
         }
         private void EndCall(object sender, EventArgsEndCall e)
         {
-            EndCallEvent?.Invoke(this, new EventArgsEndCall( e.TelephoneNumber));
+            EndCallEvent?.Invoke(this, new EventArgsEndCall(e.TelephoneNumber));
         }
         public void IncomingCall(int number, int targetNumber)
         {
             CallPortEvent?.Invoke(this, new EventArgsCall(number, targetNumber));
         }
-      public void AnswerCall(int number, int targetNumber, CallState state)
+        public void AnswerCall(int number, int targetNumber, CallState state)
         {
             AnswerPortEvent?.Invoke(this, new EventArgsAnswer(number, targetNumber, state));
         }
-       }
+    }
 }

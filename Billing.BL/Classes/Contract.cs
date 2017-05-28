@@ -5,24 +5,25 @@ using Billing.BL.Interfaces;
 
 namespace Billing.BL.Classes
 {
-  public  class Contract:IContract
+    public class Contract : IContract
     {
         private static readonly Random Rnd = new Random();
         public ISubscriber Subscriber { get; }
         public int Number { get; }
-       public TariffPlane Tariff { get; private set; }
+        public TariffPlane Tariff { get; private set; }
         private DateTime _lastTariffUpdateDate;
 
-        public Contract(ISubscriber subscriber,TariffType type)
+        public Contract(ISubscriber subscriber, TariffType type)
         {
-            Subscriber = subscriber;
-           // Tariff = tariff;
             Subscriber = subscriber;
             Number = Rnd.Next(100, 999);
             Tariff = new TariffPlane(type);
         }
 
-       
+        public Contract()
+        {
+        }
+
         public bool ChangeTariff(TariffType tariffType)
         {
             if (DateTime.Now.AddMonths(-1) >= _lastTariffUpdateDate)

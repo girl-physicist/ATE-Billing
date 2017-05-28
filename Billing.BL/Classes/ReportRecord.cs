@@ -9,19 +9,21 @@ namespace Billing.BL.Classes
 {
    public class ReportRecord
     {
-        public CallType CallType { get; private set; }
-        public int Number { get; private set; }
-        public DateTime Date { get; private set; }
-        public DateTime Time { get; private set; }
-        public int Cost { get; private set; }
+        public CallType CallType { get; }
+        public int Number { get; }
+        public int TargetNumber { get; }
+        public DateTime Date { get; }
+        public DateTime Time { get;  }
+        public int Cost { get;  }
 
-        public ReportRecord(CallType callType, int number, DateTime date, DateTime time, int cost)
+        public ReportRecord(CallType callType, int number, DateTime date, DateTime time, int cost, int targetNumber)
         {
             CallType = callType;
             Number = number;
             Date = date;
             Time = time;
             Cost = cost;
+            TargetNumber = targetNumber;
         }
     }
 }

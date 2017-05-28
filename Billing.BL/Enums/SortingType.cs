@@ -9,7 +9,9 @@ namespace Billing.BL.Enums
     public enum SortingType
     {
         ByDateOfCall,
-        ByAmount,
-        BySubscriber
+        ByCost,
+        BySubscriber,
+        ByCallType,
+        ByNumber
     }
 }

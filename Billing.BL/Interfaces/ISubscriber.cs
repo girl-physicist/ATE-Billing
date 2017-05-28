@@ -7,6 +7,5 @@
         int Money { get; }
         void AddMoney(int money);
         void RemoveMoney(int money);
-        void GetReport();
     }
 }

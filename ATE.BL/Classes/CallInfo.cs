@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ATE.BL.Classes
 {
@@ -13,7 +9,6 @@ namespace ATE.BL.Classes
         public DateTime Date { get; }
         public DateTime TimeStartCall { get; set; }
         public DateTime TimeEndCall { get; set; }
-
         public CallInfo(int myNumber, int targetNumber, DateTime date, DateTime beginCall, DateTime endCall)
         {
             CallerNumber = myNumber;
@@ -24,10 +19,6 @@ namespace ATE.BL.Classes
         }
         public CallInfo()
         {
-        }
-        public TimeSpan GetCallDuration(DateTime timeStartCall, DateTime timeEndCall)
-        {
-            return timeEndCall.Subtract(timeStartCall);
         }
     }
 }

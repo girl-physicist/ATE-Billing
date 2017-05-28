@@ -56,6 +56,11 @@
     <Compile Include="Interfaces\ITerminal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Billing.BL\Billing.BL.csproj">
+      <Project>{1789f8c9-f534-4064-adef-cf69385e06d4}</Project>
+      <Name>Billing.BL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ATE.BL.Classes;
-using ATE.BL.Enums;
-using ATE.BL.EventArgsHeirs;
-
-namespace ATE.BL.Interfaces
+﻿namespace ATE.BL.Interfaces
 {
-  public  interface ITerminal
+    public interface ITerminal
     {
         int TelephonNumber { get; }
         IPort Port { get; }

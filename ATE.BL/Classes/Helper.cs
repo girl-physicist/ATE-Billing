@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ATE.BL.Enums;
-using ATE.BL.Interfaces;
 
 namespace ATE.BL.Classes
 {
@@ -55,14 +50,13 @@ namespace ATE.BL.Classes
                     break;
                 default:
                     Console.WriteLine("Terminal with number: {0}, have rejected call", number);
-                   break;
+                    break;
             }
         }
         public void GetMessageAboutCallToDisconnectTerminal(int targetTelephoneNumber)
         {
             Console.WriteLine(" The phone {0} is not connected to the network!!!", targetTelephoneNumber);
         }
-        
     }
 }
 

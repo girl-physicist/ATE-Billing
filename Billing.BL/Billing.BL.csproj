@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Classes\Billing.cs" />
+    <Compile Include="Classes\CallInfo.cs" />
     <Compile Include="Classes\Contract.cs" />
     <Compile Include="Classes\Helper.cs" />
     <Compile Include="Classes\Report.cs" />
@@ -55,7 +56,6 @@
     <Compile Include="Interfaces\IBilling.cs" />
     <Compile Include="Interfaces\IContract.cs" />
     <Compile Include="Interfaces\IReportRender.cs" />
-    <Compile Include="Interfaces\IStorage.cs" />
     <Compile Include="Interfaces\ISubscriber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

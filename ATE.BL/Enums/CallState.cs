@@ -1,6 +1,6 @@
 ﻿namespace ATE.BL.Enums
 {
- public enum CallState
+    public enum CallState
     {
         Answered,
         Rejected

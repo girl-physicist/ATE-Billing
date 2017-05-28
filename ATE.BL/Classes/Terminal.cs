@@ -12,7 +12,7 @@ namespace ATE.BL.Classes
         private readonly IPort _terminalPort;
         public IPort Port => _terminalPort;
         readonly Helper _help = new Helper();
-       public Terminal(int number, IPort port)
+        public Terminal(int number, IPort port)
         {
             _number = number;
             _terminalPort = port;
@@ -23,12 +23,12 @@ namespace ATE.BL.Classes
             {
                 _terminalPort.CallPortEvent += TakeIncomingCall;
                 _terminalPort.AnswerPortEvent += TakeAnswer;
-               }
+            }
         }
         public void DisconnectFromPort()
         {
             if (_terminalPort.Disconnect(this))
-                {
+            {
                 _terminalPort.CallPortEvent -= TakeIncomingCall;
                 _terminalPort.AnswerPortEvent -= TakeAnswer;
             }
@@ -38,8 +38,8 @@ namespace ATE.BL.Classes
         public event EventHandler<EventArgsEndCall> EndCallEvent;
         public void Call(int targetNumber)
         {
-            if (targetNumber!=_number)
-            { OutgoingCallEvent?.Invoke(this, new EventArgsCall(_number, targetNumber));}
+            if (targetNumber != _number)
+            { OutgoingCallEvent?.Invoke(this, new EventArgsCall(_number, targetNumber)); }
             else
             {
                 _help.GetMessageAboutCallYourself(targetNumber);
@@ -56,7 +56,7 @@ namespace ATE.BL.Classes
                 AnswerToCall(e.TelephoneNumber, CallState.Answered/*, e.Id*/);
             else if (param == "Reject")
             {
-             EndCall();
+                EndCall();
             }
         }
         public void EndCall()
