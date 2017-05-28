@@ -46,9 +46,7 @@
     <Compile Include="Classes\Port.cs" />
     <Compile Include="Classes\Terminal.cs" />
     <Compile Include="Enums\CallState.cs" />
-    <Compile Include="Enums\CallType.cs" />
     <Compile Include="Enums\PortState.cs" />
-    <Compile Include="Enums\TerminalState.cs" />
     <Compile Include="EventArgsHeirs\EventArgsAnswer.cs" />
     <Compile Include="EventArgsHeirs\EventArgsCall.cs" />
     <Compile Include="EventArgsHeirs\EventArgsEndCall.cs" />

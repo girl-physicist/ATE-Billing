@@ -7,16 +7,12 @@ namespace ATE.BL.Classes
 {
     public class Terminal : ITerminal
     {
-        //public TerminalState TerminalState { get; }
-
         private readonly int _number;
         public int TelephonNumber => _number;
-
         private readonly IPort _terminalPort;
         public IPort Port => _terminalPort;
-
+        readonly Helper _help = new Helper();
         private Guid _id;
-
         public Terminal(int number, IPort port)
         {
             _number = number;
@@ -26,64 +22,48 @@ namespace ATE.BL.Classes
         {
             if (_terminalPort.Connect(this))
             {
-                 _terminalPort.CallPortEvent += TakeIncomingCall;
-                 _terminalPort.AnswerPortEvent += TakeAnswer;
+                _terminalPort.CallPortEvent += TakeIncomingCall;
+                _terminalPort.AnswerPortEvent += TakeAnswer;
             }
         }
         public event EventHandler<EventArgsCall> OutgoingCallEvent;
         public event EventHandler<EventArgsAnswer> AnswerEvent;
         public event EventHandler<EventArgsEndCall> EndCallEvent;
-        protected virtual void OnOutgoingCallEvent(int targetNumber)
-        {
-            OutgoingCallEvent?.Invoke(this, new EventArgsCall(_number, targetNumber));
-        }
         public void Call(int targetNumber)
         {
-            OnOutgoingCallEvent(targetNumber);
-        }
-        protected virtual void OnAnswerEvent(int targetNumber, CallState state, Guid id)
-        {
-            AnswerEvent?.Invoke(this, new EventArgsAnswer(_number, targetNumber, state,id));
+            if (targetNumber!=_number)
+            { OutgoingCallEvent?.Invoke(this, new EventArgsCall(_number, targetNumber));}
+            else
+            {
+                _help.GetMessageAboutCallYourself(targetNumber);
+            }
         }
         public void AnswerToCall(int target, CallState state, Guid id)
         {
-            OnAnswerEvent(target, state,id);
+            AnswerEvent?.Invoke(this, new EventArgsAnswer(_number, target, state, id));
         }
-        public void TakeIncomingCall(object sender,EventArgsCall e)
+        public void TakeIncomingCall(object sender, EventArgsCall e)
         {
             _id = e.Id;
-            Helper help = new Helper();
-            var param = help.GetAnswer(e.TelephoneNumber, e.TargetTelephoneNumber);
-            switch (param)
+            var param = _help.GetAnswer(e.TelephoneNumber, e.TargetTelephoneNumber);
+            if (param == "Answer")
+                AnswerToCall(e.TelephoneNumber, CallState.Answered, e.Id);
+            else if (param == "Reject")
             {
-                case "Answer":
-                    AnswerToCall(e.TelephoneNumber, CallState.Answered, e.Id);
-                    break;
-                case "Reject":
-                    EndCall();
-                    break;
+             EndCall();
             }
         }
-       protected virtual void OnEndCallEvent(Guid id)
+        protected virtual void OnEndCallEvent(Guid id)
         {
-            EndCallEvent?.Invoke(this, new EventArgsEndCall(id, _number));
+            EndCallEvent?.Invoke(this, new EventArgsEndCall(_id, _number));
         }
         public void EndCall()
         {
             OnEndCallEvent(_id);
         }
-        public void TakeAnswer(object sender,EventArgsAnswer e)
+        public void TakeAnswer(object sender, EventArgsAnswer e)
         {
-            switch (e.StateInCall)
-            {
-                case CallState.Answered:
-                    Console.WriteLine("Terminal with number: {0}, have answer on call a number: {1}", e.TelephoneNumber, e.TargetTelephoneNumber);
-                    break;
-                default:
-                    Console.WriteLine("Terminal with number: {0}, have rejected call", e.TelephoneNumber);
-                    break;
-            }
-           // return e.StateInCall;
+            _help.GetMessageAboutAnswer(e.StateInCall, e.TelephoneNumber, e.TargetTelephoneNumber);
         }
-     }
+    }
 }

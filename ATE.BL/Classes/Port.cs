@@ -12,7 +12,7 @@ namespace ATE.BL.Classes
         public PortState PortState { get => _portState; set => _portState = value; }
         public Port()
         {
-           PortState = PortState.Disсonnected;
+            PortState = PortState.Disсonnected;
         }
         public event EventHandler<EventArgsCall> CallPortEvent;
         public event EventHandler<EventArgsAnswer> AnswerPortEvent;
@@ -55,68 +55,33 @@ namespace ATE.BL.Classes
             }
             return false;
         }
-
         private void CallingTo(object sender, EventArgsCall e)
         {
-            OnCallEvent(e.TelephoneNumber, e.TargetTelephoneNumber);
-        }
-        protected virtual void OnCallEvent(int number, int targetNumber)
-        {
-            CallEvent?.Invoke(this, new EventArgsCall(number, targetNumber));
-        }
-        
-        protected virtual void OnCallPortEvent(int number, int targetNumber)
-        {
-            CallPortEvent?.Invoke(this, new EventArgsCall(number, targetNumber));
-        }
-        protected virtual void OnCallPortEvent(int number, int targetNumber,Guid id)
-        {
-            CallPortEvent?.Invoke(this, new EventArgsCall(number, targetNumber,id));
-        }
-        public void IncomingCall(int number, int targetNumber)
-        {
-            OnCallPortEvent(number, targetNumber);
-        }
-        public void IncomingCall(int number, int targetNumber,Guid id)
-        {
-            OnCallPortEvent(number, targetNumber,id);
-        }
-        protected virtual void OnAnswerPortEvent(int number, int targetNumber, CallState state)
-        {
-            AnswerPortEvent?.Invoke(this, new EventArgsAnswer(number,targetNumber,state));
-        }
-        public void AnswerCall(int number, int targetNumber, CallState state)
-        {
-            OnAnswerPortEvent(number, targetNumber, state);
-        }
-        protected virtual void OnAnswerPortEvent(int number, int targetNumber, CallState state,Guid id)
-        {
-            AnswerPortEvent?.Invoke(this, new EventArgsAnswer(number, targetNumber, state,id));
-        }
-        public void AnswerCall(int number, int targetNumber, CallState state,Guid id)
-        {
-            OnAnswerPortEvent(number, targetNumber, state,id);
-        }
-        protected virtual void OnAnswerEvent(EventArgsAnswer e)
-        {
-            AnswerEvent?.Invoke(this, new EventArgsAnswer(
-                e.TelephoneNumber,
-                e.TargetTelephoneNumber,
-                e.StateInCall));
+            CallEvent?.Invoke(this, new EventArgsCall(e.TelephoneNumber, e.TargetTelephoneNumber));
         }
         private void AnswerTo(object sender, EventArgsAnswer e)
         {
-            OnAnswerEvent(e);
-        }
-        protected virtual void OnEndCallEvent( Guid id ,int number)
-        {
-            EndCallEvent?.Invoke(this,new EventArgsEndCall(id,number));
+            AnswerEvent?.Invoke(this, new EventArgsAnswer(e.TelephoneNumber, e.TargetTelephoneNumber, e.StateInCall));
         }
         private void EndCall(object sender, EventArgsEndCall e)
         {
-            OnEndCallEvent(e.Id, e.TelephoneNumber);
+            EndCallEvent?.Invoke(this, new EventArgsEndCall(e.Id, e.TelephoneNumber));
         }
-
-       
+        public void IncomingCall(int number, int targetNumber)
+        {
+            CallPortEvent?.Invoke(this, new EventArgsCall(number, targetNumber));
+        }
+        public void IncomingCall(int number, int targetNumber, Guid id)
+        {
+            CallPortEvent?.Invoke(this, new EventArgsCall(number, targetNumber, id));
+        }
+        public void AnswerCall(int number, int targetNumber, CallState state)
+        {
+            AnswerPortEvent?.Invoke(this, new EventArgsAnswer(number, targetNumber, state));
+        }
+        public void AnswerCall(int number, int targetNumber, CallState state, Guid id)
+        {
+            AnswerPortEvent?.Invoke(this, new EventArgsAnswer(number, targetNumber, state, id));
+        }
     }
 }

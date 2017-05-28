@@ -15,6 +15,8 @@ namespace ATE.BL.Interfaces
         bool Connect(Terminal terminal);
         bool Disconnect(Terminal terminal);
         bool Blocked(Terminal terminal);
+     
+
         event EventHandler<EventArgsCall> CallEvent;
         event EventHandler<EventArgsCall> CallPortEvent;
         event EventHandler<EventArgsAnswer> AnswerPortEvent;

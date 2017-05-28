@@ -41,12 +41,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Classes\Billing.cs" />
     <Compile Include="Classes\Contract.cs" />
     <Compile Include="Classes\Helper.cs" />
+    <Compile Include="Classes\Report.cs" />
+    <Compile Include="Classes\ReportRecord.cs" />
+    <Compile Include="Classes\ReportRender.cs" />
     <Compile Include="Classes\Subscriber.cs" />
     <Compile Include="Classes\TariffPlane.cs" />
+    <Compile Include="Enums\CallType.cs" />
+    <Compile Include="Enums\SortingType.cs" />
     <Compile Include="Enums\TariffType.cs" />
+    <Compile Include="Interfaces\IBilling.cs" />
     <Compile Include="Interfaces\IContract.cs" />
+    <Compile Include="Interfaces\IReportRender.cs" />
+    <Compile Include="Interfaces\IStorage.cs" />
     <Compile Include="Interfaces\ISubscriber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

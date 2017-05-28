@@ -10,7 +10,7 @@ namespace ATE.BL.EventArgsHeirs
     {
         public int TelephoneNumber { get;  }
         public int TargetTelephoneNumber { get;  }
-       public Guid Id { get; }
+        public Guid Id { get; }
         public EventArgsCall(int number, int target)
         {
             TelephoneNumber = number;

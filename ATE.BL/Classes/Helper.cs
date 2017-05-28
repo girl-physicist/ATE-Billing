@@ -3,40 +3,62 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATE.BL.Enums;
+using ATE.BL.Interfaces;
 
 namespace ATE.BL.Classes
 {
-  public class Helper
+    public class Helper
     {
-        public string GetAnswer(int numb,int target)
+        public string GetAnswer(int numb, int target)
         {
-         string answer =null;
+            string answer = null;
             bool flag = true;
-            Console.WriteLine("Have incoming Call at number: {0} to terminal {1}",numb, target);
-            while (flag == true)
+            Console.WriteLine("Have incoming Call at number: {0} to terminal {1}", numb, target);
+            while (flag)
             {
                 Console.WriteLine("Answer? Y/N");
                 var k = Console.ReadKey().Key;
-                if (k == ConsoleKey.Y)
+                switch (k)
                 {
-                    flag = false;
-                    answer = "Answer";
-                    Console.WriteLine();
+                    case ConsoleKey.Y:
+                        flag = false;
+                        answer = "Answer";
+                        Console.WriteLine();
+                        break;
+                    case ConsoleKey.N:
+                        flag = false;
+                        answer = "Reject";
+                        Console.WriteLine();
+                        break;
+                    default:
+                        Console.WriteLine();
+                        break;
                 }
-                else if (k == ConsoleKey.N)
-                {
-                    flag = false;
-                    answer = "Reject";
-                    Console.WriteLine();
-                 }
-                else
-                {
-                    flag = true;
-                    Console.WriteLine();
-                }
-              }
+            }
             return answer;
         }
+        public void GetMessageAboutNonexistentNumber(int targetTelephoneNumber)
+        {
+            Console.WriteLine("{0} is non-existent number!!!", targetTelephoneNumber);
+        }
+        public void GetMessageAboutCallYourself(int targetTelephoneNumber)
+        {
+            Console.WriteLine("{0} is your number!!!", targetTelephoneNumber);
+        }
+        public void GetMessageAboutAnswer(CallState stateInCall, int number, int target)
+        {
+            switch (stateInCall)
+            {
+                case CallState.Answered:
+                    Console.WriteLine("Terminal with number: {0}, have answer on call from number: {1}", number, target);
+                    break;
+                default:
+                    Console.WriteLine("Terminal with number: {0}, have rejected call", number);
+                   break;
+            }
+        }
+       
     }
 }
 
