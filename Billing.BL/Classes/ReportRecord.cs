@@ -7,23 +7,21 @@ using ATE.BL.Enums;
 
 namespace Billing.BL.Classes
 {
-   public class ReportRecord
+    public class ReportRecord
     {
         public CallType CallType { get; }
         public int Number { get; }
-        public int TargetNumber { get; }
         public DateTime Date { get; }
-        public DateTime Time { get;  }
-        public int Cost { get;  }
+        public DateTime CallDuration { get; }
+        public int Cost { get; }
 
-        public ReportRecord(CallType callType, int number, DateTime date, DateTime time, int cost, int targetNumber)
+        public ReportRecord(int number, CallType type, DateTime date, DateTime callDuration, int cost)
         {
-            CallType = callType;
             Number = number;
+            CallType = type;
             Date = date;
-            Time = time;
+            CallDuration = callDuration;
             Cost = cost;
-            TargetNumber = targetNumber;
         }
     }
 }

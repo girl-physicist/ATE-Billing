@@ -14,6 +14,9 @@ namespace Billing.BL.Interfaces
         ISubscriber Subscriber { get; }
         TariffPlane Tariff { get; }
         int Number { get; }
+        DateTime DateOfConclusion { get; }
         bool ChangeTariff(TariffType tariffType);
+        // для проверки возможности изменения тарифа
+        bool ChangeTariff(TariffType tariffType, DateTime lastTariffUpdateDate);
     }
 }

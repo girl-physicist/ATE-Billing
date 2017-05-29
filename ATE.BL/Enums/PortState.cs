@@ -4,7 +4,6 @@
     {
         Connected,
         Disсonnected,
-        Call,
         Blocked
     }
 }

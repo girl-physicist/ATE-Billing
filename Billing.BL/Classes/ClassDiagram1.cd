@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Billing.BL.Classes.Billing" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAABAAAAAAAgAAAAAAAAJAAAAAAAAAAAIAAAAgAA=</HashCode>
+      <FileName>Classes\Billing.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.221" />
+  </Class>
+  <Class Name="Billing.BL.Classes.CallInfo" Collapsed="true">
+    <Position X="7.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAADAAAAAAAAAAAAAAAABCAAAAABAABAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\CallInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Billing.BL.Classes.Contract" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAQAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Classes\Contract.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Billing.BL.Classes.Report" Collapsed="true">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIEAAIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Report.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Billing.BL.Classes.ReportRecord" Collapsed="true">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAQAQABEAAABAAAAAIAAABAAAAAABAgAA=</HashCode>
+      <FileName>Classes\ReportRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Billing.BL.Classes.ReportRender" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Classes\ReportRender.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Billing.BL.Classes.Subscriber" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAg=</HashCode>
+      <FileName>Classes\Subscriber.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Billing.BL.Classes.TariffPlane" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ASAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\TariffPlane.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Billing.BL.Interfaces.IBilling" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IBilling.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Billing.BL.Interfaces.IContract" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IContract.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Billing.BL.Interfaces.IReportRender" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IReportRender.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Billing.BL.Interfaces.ISubscriber" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAg=</HashCode>
+      <FileName>Interfaces\ISubscriber.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

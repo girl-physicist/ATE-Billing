@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Billing.BL.Enums;
 using Billing.BL.Interfaces;
@@ -22,20 +21,19 @@ namespace Billing.BL.Classes
                         ToList();
 
                 case SortingType.ByDateOfCall:
-                    return  rep.
+                    return rep.
                         OrderBy(x => x.Date).
                         ToList();
 
                 case SortingType.ByCost:
-                    return  rep
+                    return rep
                         .OrderBy(x => x.Cost)
                         .ToList();
 
                 case SortingType.ByNumber:
-                    return  rep.
+                    return rep.
                         OrderBy(x => x.Number).
                         ToList();
-
                 default:
                     return rep;
             }

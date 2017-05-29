@@ -11,24 +11,28 @@ namespace Billing.BL.Classes
 {
     public class Billing : IBilling
     {
-       private IDictionary<int, IContract> BillingDictionary { get; set; }
-        private ICollection<CallInfo> _storage;
+        private readonly IDictionary<int, IContract> _billingDictionary;
+        private readonly ICollection<CallInfo> _storage;
         public Billing()
         {
             _storage = new List<CallInfo>();
-            BillingDictionary = new Dictionary<int, IContract>();
+            _billingDictionary = new Dictionary<int, IContract>();
         }
         public void AddCallInfo(CallInfo obj)
         {
             _storage.Add(obj);
-           }
+            }
         public ICollection<CallInfo> GetInfoList()
         {
             return _storage;
         }
         public void RegisterContract(IContract contract)
         {
-            BillingDictionary.Add(contract.Number, contract);
+            _billingDictionary.Add(contract.Number, contract);
+        }
+        public void TerminateContract(IContract contract)
+        {
+            _billingDictionary.Remove(contract.Number);
         }
         public Report GetReport(int telephoneNumber)
         {
@@ -50,15 +54,22 @@ namespace Billing.BL.Classes
                     callType = CallType.IncomingСall;
                     number = call.CallerNumber;
                 }
-                var cost = call.GetCost(BillingDictionary.Where(x => x.Key == number).Select(x => x.Value).ElementAt(0)
+                var cost = call.GetCost(_billingDictionary.Where(x => x.Key == number).Select(x => x.Value).ElementAt(0)
                     , call.TimeStartCall, call.TimeEndCall);
-                var record = new ReportRecord(callType, number, call.TimeStartCall,
-                    new DateTime((call.TimeEndCall - call.TimeStartCall).Ticks), cost,call.TargetNumber);
+                var record = new ReportRecord(number, callType, call.TimeStartCall,
+                    new DateTime((call.TimeEndCall - call.TimeStartCall).Ticks), cost);
                 report.AddRecord(record);
             }
             return report;
         }
-
-       
+        public int GetInvoiceForPayment(IContract contract)
+        {
+            for (int i = 1; i <= 12; i++)
+            {
+                DateTime dateOfPayment = contract.DateOfConclusion.AddMonths(i);
+            }
+                int invoice = 0;
+            return invoice;
+        }
     }
 }

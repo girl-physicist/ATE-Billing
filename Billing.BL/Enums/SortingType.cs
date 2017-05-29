@@ -10,7 +10,6 @@ namespace Billing.BL.Enums
     {
         ByDateOfCall,
         ByCost,
-        BySubscriber,
         ByCallType,
         ByNumber
     }

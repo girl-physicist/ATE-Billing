@@ -9,7 +9,7 @@ namespace Billing.BL.Classes
         public int CallerNumber { get; }
         public int TargetNumber { get; }
         public DateTime Date { get; }
-        public DateTime TimeStartCall { get;  }
+        public DateTime TimeStartCall { get; }
         public DateTime TimeEndCall { get; }
         public int Cost { get; }
 
@@ -29,13 +29,18 @@ namespace Billing.BL.Classes
             Date = date;
             TimeStartCall = beginCall;
             TimeEndCall = endCall;
-            
+
         }
         public int GetCost(IContract contract, DateTime timeStartCall, DateTime timeEndCall)
         {
-            var sumOfCall = contract.Tariff.CostOfCallPerMinute * TimeSpan.FromTicks((timeEndCall - timeStartCall).Ticks).TotalMinutes;
+            //var sumOfCall = contract.Tariff.CostOfCallPerMinute * TimeSpan.FromTicks((timeEndCall - timeStartCall).Ticks).TotalMinutes;
+            var sumOfCall = contract.Tariff.CostOfCallPerMinute * TimeSpan.FromTicks((timeEndCall - timeStartCall).Ticks).TotalMinutes <= 1
+                ? 1
+                : TimeSpan.FromTicks((timeEndCall - timeStartCall).Ticks).TotalMinutes; ;
             return (int)sumOfCall;
-           // targetTuple.Item2.Subscriber.RemoveMoney(inf.Cost);
+            // targetTuple.Item2.Subscriber.RemoveMoney(inf.Cost);
         }
+
+       
     }
 }

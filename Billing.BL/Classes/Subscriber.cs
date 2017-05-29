@@ -18,15 +18,15 @@ namespace Billing.BL.Classes
         public string FirstName { get; }
         public string LastName { get; }
         public int Money { get; private set; }
+
         public void AddMoney(int money)
         {
             Money += money;
         }
-
         public void RemoveMoney(int money)
         {
             Money -= money;
         }
-       
+        
     }
 }

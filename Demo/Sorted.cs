@@ -37,7 +37,7 @@ namespace Demo
                 else if (key == ConsoleKey.NumPad3 || key == ConsoleKey.D3)
                 {
                     flag = false;
-                    sortingType = SortingType.BySubscriber;
+                    sortingType = SortingType.ByNumber;
                 }
                 else if (key == ConsoleKey.NumPad4 || key == ConsoleKey.D4)
                 {
@@ -52,8 +52,8 @@ namespace Demo
 
             foreach (var item in render.SortCalls(billing.GetReport(terminal.TelephonNumber), sortingType))
             {
-                Console.WriteLine("Calls:\n Type {0} |\n Date: {1} |\n Duration: {2} | Cost: {3} | Telephone number: {4} | Target number: {5}",
-                    item.CallType, item.Date, item.Time.ToString("mm:ss"), item.Cost, item.Number, item.TargetNumber);
+                Console.WriteLine("\nCalls:\n Type {0} |\n Date: {1} |\n Duration: {2} | Cost: {3} | Telephone number: {4}",
+                    item.CallType, item.Date, item.CallDuration.ToString("mm:ss"), item.Cost, item.Number);
             }
         }
     }
