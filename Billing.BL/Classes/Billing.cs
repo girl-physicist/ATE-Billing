@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using ATE.BL.Enums;
+using Billing.BL.Enums;
 using Billing.BL.Interfaces;
 
 namespace Billing.BL.Classes
@@ -21,7 +18,7 @@ namespace Billing.BL.Classes
         public void AddCallInfo(CallInfo obj)
         {
             _storage.Add(obj);
-            }
+        }
         public ICollection<CallInfo> GetInfoList()
         {
             return _storage;
@@ -44,32 +41,43 @@ namespace Billing.BL.Classes
             {
                 CallType callType;
                 int number;
+                int cost;
                 if (call.CallerNumber == telephoneNumber)
                 {
                     callType = CallType.OutgoingCall;
                     number = call.TargetNumber;
+                    cost = call.GetCost(_billingDictionary.Where(x => x.Key == telephoneNumber).Select(x => x.Value).ElementAt(0)
+                        , call.TimeStartCall, call.TimeEndCall);
                 }
                 else
                 {
                     callType = CallType.IncomingСall;
                     number = call.CallerNumber;
+                    cost = 0;
                 }
-                var cost = call.GetCost(_billingDictionary.Where(x => x.Key == number).Select(x => x.Value).ElementAt(0)
-                    , call.TimeStartCall, call.TimeEndCall);
                 var record = new ReportRecord(number, callType, call.TimeStartCall,
                     new DateTime((call.TimeEndCall - call.TimeStartCall).Ticks), cost);
                 report.AddRecord(record);
             }
             return report;
         }
-        public int GetInvoiceForPayment(IContract contract)
+        public int PayInvoice(IContract contract, int monthNumber)
         {
-            for (int i = 1; i <= 12; i++)
+            double summ;
+            var listRecords = GetReport(contract.Number).GetRecords();
+            var listAllDuration=listRecords.Where(x => x.Date.Month == monthNumber).Where(x=>x.CallType== CallType.OutgoingCall).Select(x => x.CallDuration);
+            var allDuration = listAllDuration.Sum(x => Math.Ceiling(((double) x.Hour * 360 + x.Second + x.Minute * 60) / 60));
+            var allCallCost= listRecords.Where(x => x.Date.Month == monthNumber).Select(x => x.Cost).Sum();
+            allDuration = allDuration < 1 ? 1 : allDuration;
+            if (allDuration > contract.Tariff.FreeMinutesInMonth)
             {
-                DateTime dateOfPayment = contract.DateOfConclusion.AddMonths(i);
+                summ = allCallCost+ contract.Tariff.SubscriptionFee- contract.Tariff.FreeMinutesInMonth* contract.Tariff.CostOfCallPerMinute;
             }
-                int invoice = 0;
-            return invoice;
+            else
+            {
+                summ = contract.Tariff.SubscriptionFee;
+            }
+            return (int)summ;
         }
     }
 }

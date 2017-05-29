@@ -43,18 +43,6 @@ namespace ATE.BL.Classes
             }
             return false;
         }
-        public bool Blocked(Terminal terminal)
-        {
-            if (PortState != PortState.Blocked)
-            {
-                PortState = PortState.Blocked;
-                _flag = false;
-                terminal.OutgoingCallEvent -= CallingTo;
-                terminal.AnswerEvent -= AnswerTo;
-                terminal.EndCallEvent -= EndCall;
-            }
-            return false;
-        }
         private void CallingTo(object sender, EventArgsCall e)
         {
             CallEvent?.Invoke(this, new EventArgsCall(e.TelephoneNumber, e.TargetTelephoneNumber));

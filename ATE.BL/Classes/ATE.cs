@@ -11,8 +11,8 @@ namespace ATE.BL.Classes
         private Billing.BL.Classes.Billing Billing { get; }
         public delegate void SentData(Billing.BL.Classes.CallInfo callInfo);
         public event SentData SentDataEvent;
-        readonly Helper _help = new Helper();
-        private IDictionary<int, IPort> _usersData;
+        private readonly Helper _help = new Helper();
+        private readonly IDictionary<int, IPort> _usersData;
         private CallInfo _callInfo;
         public ATE(Billing.BL.Classes.Billing billing)
         {
@@ -85,7 +85,7 @@ namespace ATE.BL.Classes
                         targetPort.AnswerCall(args.TelephoneNumber, args.TargetTelephoneNumber, CallState.Rejected);
                         SentDataEvent?.Invoke(new Billing.BL.Classes.CallInfo(GetInfoList().CallerNumber, GetInfoList().TargetNumber
                             , GetInfoList().Date, GetInfoList().TimeStartCall, GetInfoList().TimeEndCall));
-                        }
+                    }
                 }
                 else
                 {

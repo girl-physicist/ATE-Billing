@@ -7,18 +7,17 @@ using Billing.BL.Interfaces;
 
 namespace Billing.BL.Classes
 {
-   public class Subscriber:ISubscriber
+    public class Subscriber : ISubscriber
     {
-       public Subscriber(string firstName, string lastName)
+        public Subscriber(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
             Money = 50;
-            }
+        }
         public string FirstName { get; }
         public string LastName { get; }
         public int Money { get; private set; }
-
         public void AddMoney(int money)
         {
             Money += money;
@@ -27,6 +26,9 @@ namespace Billing.BL.Classes
         {
             Money -= money;
         }
-        
+        public int ShowBalance()
+        {
+            return Money;
+        }
     }
 }

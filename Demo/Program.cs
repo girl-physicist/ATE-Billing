@@ -76,6 +76,24 @@ namespace Demo
             Thread.Sleep(2000);
             terminal2.EndCall();
             Console.WriteLine();
+           
+            // отчет для абонента 1
+            sorted.ShowSortedCallInfo(render, billing, terminal1);
+            Console.WriteLine("-----------------------------------------------");
+            // счет к оплате за месяц
+            Console.WriteLine("Invoice for payment: {0}",billing.PayInvoice(contract1, DateTime.Now.Month));
+            // актуальный баланс
+            Console.WriteLine(" Current balance: {0}", subscriber1.ShowBalance());
+            // оплатить по счету
+            subscriber1.RemoveMoney( billing.PayInvoice(contract1,DateTime.Now.Month));
+            Console.WriteLine("Payment accepted");
+            // актуальный баланс
+            Console.WriteLine(" Current balance: {0}", subscriber1.ShowBalance());
+            // пополнить баланс
+            subscriber1.AddMoney(30);
+            // актуальный баланс
+            Console.WriteLine(" Current balance: {0}", subscriber1.ShowBalance());
+
             // попытка смены тарифного плана
             Console.WriteLine();
             Console.WriteLine(contract1.ChangeTariff(TariffType.Tarif2)
@@ -84,13 +102,10 @@ namespace Demo
             Console.WriteLine();
 
             // для проверки возможности изменения тарифа
-            Console.WriteLine(contract1.ChangeTariff(TariffType.Tarif3,DateTime.Now.AddMonths(-3).Date)
+            Console.WriteLine(contract1.ChangeTariff(TariffType.Tarif3, DateTime.Now.AddMonths(-3).Date)
                 ? "Tariff has changed!"
                 : "Wait until the end of the month!");
             Console.WriteLine();
-
-            // отчет для абонента 1
-            sorted.ShowSortedCallInfo(render, billing, terminal1);
 
             Console.ReadKey();
         }

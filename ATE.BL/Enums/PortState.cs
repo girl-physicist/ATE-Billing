@@ -3,7 +3,6 @@
     public enum PortState
     {
         Connected,
-        Disсonnected,
-        Blocked
+        Disсonnected
     }
 }

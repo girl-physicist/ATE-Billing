@@ -10,7 +10,6 @@ namespace ATE.BL.Interfaces
         PortState PortState { get; set; }
         bool Connect(Terminal terminal);
         bool Disconnect(Terminal terminal);
-        bool Blocked(Terminal terminal);
         event EventHandler<EventArgsCall> CallEvent;
         event EventHandler<EventArgsCall> CallPortEvent;
         event EventHandler<EventArgsAnswer> AnswerPortEvent;

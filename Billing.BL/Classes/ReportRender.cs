@@ -19,17 +19,14 @@ namespace Billing.BL.Classes
                     return rep.
                         OrderBy(x => x.CallType).
                         ToList();
-
                 case SortingType.ByDateOfCall:
                     return rep.
                         OrderBy(x => x.Date).
                         ToList();
-
                 case SortingType.ByCost:
                     return rep
                         .OrderBy(x => x.Cost)
                         .ToList();
-
                 case SortingType.ByNumber:
                     return rep.
                         OrderBy(x => x.Number).

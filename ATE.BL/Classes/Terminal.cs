@@ -7,30 +7,28 @@ namespace ATE.BL.Classes
 {
     public class Terminal : ITerminal
     {
-        private readonly int _number;
-        public int TelephonNumber => _number;
-        private readonly IPort _terminalPort;
-        public IPort Port => _terminalPort;
-        readonly Helper _help = new Helper();
+        public int TelephonNumber { get; }
+        public IPort Port { get; }
+        private readonly Helper _help = new Helper();
         public Terminal(int number, IPort port)
         {
-            _number = number;
-            _terminalPort = port;
+            TelephonNumber = number;
+            Port = port;
         }
         public void ConnectToPort()
         {
-            if (_terminalPort.Connect(this))
+            if (Port.Connect(this))
             {
-                _terminalPort.CallPortEvent += TakeIncomingCall;
-                _terminalPort.AnswerPortEvent += TakeAnswer;
+                Port.CallPortEvent += TakeIncomingCall;
+                Port.AnswerPortEvent += TakeAnswer;
             }
         }
         public void DisconnectFromPort()
         {
-            if (_terminalPort.Disconnect(this))
+            if (Port.Disconnect(this))
             {
-                _terminalPort.CallPortEvent -= TakeIncomingCall;
-                _terminalPort.AnswerPortEvent -= TakeAnswer;
+                Port.CallPortEvent -= TakeIncomingCall;
+                Port.AnswerPortEvent -= TakeAnswer;
             }
         }
         public event EventHandler<EventArgsCall> OutgoingCallEvent;
@@ -38,8 +36,8 @@ namespace ATE.BL.Classes
         public event EventHandler<EventArgsEndCall> EndCallEvent;
         public void Call(int targetNumber)
         {
-            if (targetNumber != _number)
-            { OutgoingCallEvent?.Invoke(this, new EventArgsCall(_number, targetNumber)); }
+            if (targetNumber != TelephonNumber)
+            { OutgoingCallEvent?.Invoke(this, new EventArgsCall(TelephonNumber, targetNumber)); }
             else
             {
                 _help.GetMessageAboutCallYourself(targetNumber);
@@ -47,7 +45,7 @@ namespace ATE.BL.Classes
         }
         public void AnswerToCall(int target, CallState state)
         {
-            AnswerEvent?.Invoke(this, new EventArgsAnswer(_number, target, state));
+            AnswerEvent?.Invoke(this, new EventArgsAnswer(TelephonNumber, target, state));
         }
         public void TakeIncomingCall(object sender, EventArgsCall e)
         {
@@ -61,7 +59,7 @@ namespace ATE.BL.Classes
         }
         public void EndCall()
         {
-            EndCallEvent?.Invoke(this, new EventArgsEndCall(_number));
+            EndCallEvent?.Invoke(this, new EventArgsEndCall(TelephonNumber));
         }
         public void TakeAnswer(object sender, EventArgsAnswer e)
         {

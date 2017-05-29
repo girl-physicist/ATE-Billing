@@ -1,5 +1,4 @@
 ﻿using System;
-using Billing.BL.Enums;
 using Billing.BL.Interfaces;
 
 namespace Billing.BL.Classes
@@ -29,18 +28,13 @@ namespace Billing.BL.Classes
             Date = date;
             TimeStartCall = beginCall;
             TimeEndCall = endCall;
-
         }
         public int GetCost(IContract contract, DateTime timeStartCall, DateTime timeEndCall)
         {
-            //var sumOfCall = contract.Tariff.CostOfCallPerMinute * TimeSpan.FromTicks((timeEndCall - timeStartCall).Ticks).TotalMinutes;
-            var sumOfCall = contract.Tariff.CostOfCallPerMinute * TimeSpan.FromTicks((timeEndCall - timeStartCall).Ticks).TotalMinutes <= 1
-                ? 1
-                : TimeSpan.FromTicks((timeEndCall - timeStartCall).Ticks).TotalMinutes; ;
+            var sumOfCall = Math.Ceiling(TimeSpan.FromTicks((timeEndCall - timeStartCall).Ticks).TotalMinutes) <= 1
+                ? contract.Tariff.CostOfCallPerMinute
+                : contract.Tariff.CostOfCallPerMinute * Math.Ceiling(TimeSpan.FromTicks((timeEndCall - timeStartCall).Ticks).TotalMinutes);
             return (int)sumOfCall;
-            // targetTuple.Item2.Subscriber.RemoveMoney(inf.Cost);
         }
-
-       
     }
 }
